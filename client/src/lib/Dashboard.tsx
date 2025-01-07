@@ -22,15 +22,15 @@ export function Dashboard() {
   // Handle share action
   const handleShare = async () => {
     try {
-      const links = await shareAllContent();  // Assuming this returns an array of links
-      setFetchedLinks(links);  // Save the fetched links to state
-      setIsModalOpen(true);  // Open the modal to display links
+      const links = await shareAllContent(); 
+      setFetchedLinks(links);  
+      setIsModalOpen(true);  
     } catch (error) {
       console.error("Error sharing content:", error);
     }
   };
 
-  if (loading) return LoaderWheel;
+  if (loading) return <LoaderWheel />;
   return (
     <div>
       <Sidebar />

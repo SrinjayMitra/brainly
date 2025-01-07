@@ -30,7 +30,7 @@ export function OnlyTweets() {
     }
   };
 
-  if (loading) return LoaderWheel;
+  if (loading) return <LoaderWheel/>;
   return (
     <div>
       <Sidebar />

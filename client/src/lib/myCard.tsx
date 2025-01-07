@@ -31,6 +31,11 @@ interface DynamicCardProps {
   className?: string; // Additional Tailwind classes
 }
 
+declare global {
+  interface Window {
+    twttr: any;  // Declaring `twttr` as `any` so it bypasses TypeScript's strict typing
+  }
+}
 const MyCard: React.FC<DynamicCardProps> = ({
   type,
   title,

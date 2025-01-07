@@ -30,7 +30,7 @@ export function OnlyLinks() {
     }
   };
 
-  if (loading) return LoaderWheel;
+  if (loading) return <LoaderWheel/>;
   return (
     <div>
       <Sidebar />
