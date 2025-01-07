@@ -1,4 +1,4 @@
-import React, { useState } from "react"; // Import useState here
+import  { useState } from "react"; // Import useState here
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { PlusIcon } from "@/Icons/addIcon";
@@ -14,6 +14,7 @@ export function Dashboard() {
   // Declare state variables for the modal and alert visibility
   const [showModal, setShowModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  //@ts-ignore
   const [showAlert, setShowAlert] = useState(false);
   const { content, loading, deleteContent,shareContent,shareAllContent} = useContent();
   

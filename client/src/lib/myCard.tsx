@@ -33,7 +33,8 @@ interface DynamicCardProps {
 
 declare global {
   interface Window {
-    twttr: any;  // Declaring `twttr` as `any` so it bypasses TypeScript's strict typing
+    twttr: any; 
+     // Declaring `twttr` as `any` so it bypasses TypeScript's strict typing
   }
 }
 const MyCard: React.FC<DynamicCardProps> = ({
