@@ -4,7 +4,6 @@ import { TwitterIcon } from "@/Icons/twitterIcon";
 import { YoutubeIcon } from "@/Icons/youtubeIcon";
 import { NotesIcon } from "@/Icons/notesIcon";
 import { LinkIcon } from "@/Icons/linkIcon";
-import { HastagIcon } from "@/Icons/HastagIcon";
 import { Logo } from "@/Icons/Logo";
 import HomeIcon from "@/Icons/home";
 import { useNavigate } from "react-router-dom";
