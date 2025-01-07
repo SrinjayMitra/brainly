@@ -1,0 +1,3291 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Rebrandly API",
+    "description": "Transform your long URLs into short branded links",
+    "termsOfService": "https://rebrandly.com/terms-conditions",
+    "contact": {
+      "name": "API Support",
+      "url": "https://developers.rebrandly.com/discuss",
+      "email": "support@rebrandly.com"
+    },
+    "version": "2021-12-01"
+  },
+  "servers": [
+    {
+      "url": "https://api.rebrandly.com"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "ScriptUpdateRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "value"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The new name you want to associated to the script"
+          },
+          "value": {
+            "type": "string",
+            "description": "A new javascript snippet (including <script> and </script> HTML tags) to replace the old one"
+          }
+        }
+      },
+      "ScriptCreationRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "value"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name you want to associated to the script"
+          },
+          "value": {
+            "type": "string",
+            "description": "A javascript snippet (including <script> and </script> HTML tags)"
+          }
+        }
+      },
+      "TagCreationRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "color"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name you want to associated to the tag"
+          },
+          "color": {
+            "type": "string",
+            "description": "The hexadecimal code for a color you want to assign to the tag"
+          }
+        }
+      },
+      "TagUpdateRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "color"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The new name you want to associated to the tag"
+          },
+          "color": {
+            "type": "string",
+            "description": "The hexadecimal code for a new color you want to assign to the tag"
+          }
+        }
+      },
+      "Script": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "ftag4cc5b6ee45d6g7897b06ac2d16af"
+          },
+          "name": {
+            "type": "string",
+            "example": "Test alert"
+          },
+          "uri": {
+            "type": "string",
+            "example": "https://custom.rebrandly.com/user/abcdecc5b6ee45d6g7897b06ac2d1xyz"
+          }
+        }
+      },
+      "SharedWorkspace": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "fffa4cc5b6ee45d6g7897b06ac2d16af"
+          },
+          "name": {
+            "type": "string",
+            "example": "Marketing"
+          },
+          "avatarUrl": {
+            "type": "string",
+            "example": "https://avatars.rebrandly.com/workspace/fffa4cc5b6ee45d6g7897b06ac2d16af"
+          },
+          "role": {
+            "type": "string",
+            "example": "admin"
+          }
+        }
+      },
+      "Account": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "3aehje9d536s46d59ba5bcf49b582ear"
+          },
+          "fullName": {
+            "type": "string",
+            "example": "Stanford University"
+          },
+          "username": {
+            "type": "string",
+            "example": "fake@stanford.edu"
+          },
+          "email": {
+            "type": "string",
+            "example": "fake@stanford.edu"
+          },
+          "avatarUrl": {
+            "type": "string",
+            "example": "https://avatars.rebrandly.com/account/3aehje9d536s46d59ba5bcf49b582ear"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2016-07-13T10:54:12.000Z"
+          },
+          "subscription": {
+            "type": "object",
+            "properties": {
+              "createdAt": {
+                "type": "string",
+                "example": "2016-07-13T10:54:12.000Z"
+              },
+              "limits": {
+                "type": "object",
+                "properties": {
+                  "links": {
+                    "type": "object",
+                    "properties": {
+                      "used": {
+                        "type": "integer",
+                        "example": 7504,
+                        "default": 0
+                      },
+                      "max": {
+                        "type": "integer",
+                        "example": 10000,
+                        "default": 0
+                      }
+                    }
+                  },
+                  "domains": {
+                    "type": "object",
+                    "properties": {
+                      "used": {
+                        "type": "integer",
+                        "example": 17,
+                        "default": 0
+                      },
+                      "max": {
+                        "type": "integer",
+                        "example": 100,
+                        "default": 0
+                      }
+                    }
+                  },
+                  "workspaces": {
+                    "type": "object",
+                    "properties": {
+                      "used": {
+                        "type": "integer",
+                        "example": 1,
+                        "default": 0
+                      },
+                      "max": {
+                        "type": "integer",
+                        "example": 50,
+                        "default": 0
+                      }
+                    }
+                  },
+                  "teammates": {
+                    "type": "object",
+                    "properties": {
+                      "used": {
+                        "type": "integer",
+                        "example": 5,
+                        "default": 0
+                      },
+                      "max": {
+                        "type": "integer",
+                        "example": 100,
+                        "default": 0
+                      }
+                    }
+                  },
+                  "tags": {
+                    "type": "object",
+                    "properties": {
+                      "used": {
+                        "type": "integer",
+                        "example": 0,
+                        "default": 0
+                      },
+                      "max": {
+                        "type": "integer",
+                        "example": 50,
+                        "default": 0
+                      }
+                    }
+                  },
+                  "scripts": {
+                    "type": "object",
+                    "properties": {
+                      "used": {
+                        "type": "integer",
+                        "example": 0,
+                        "default": 0
+                      },
+                      "max": {
+                        "type": "integer",
+                        "example": 50,
+                        "default": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "fffa4cc5b6ee45d6g7897b06ac2d16af"
+          },
+          "name": {
+            "type": "string",
+            "example": "promo"
+          },
+          "color": {
+            "type": "string",
+            "example": "FF0044"
+          }
+        }
+      },
+      "LinkCreationRequest": {
+        "type": "object",
+        "required": [
+          "destination"
+        ],
+        "properties": {
+          "destination": {
+            "type": "string",
+            "description": "The destination URL you want your branded short link to point to. Example: https://google.com"
+          },
+          "slashtag": {
+            "type": "string",
+            "description": "The keyword portion of your branded short link. A random one (as short as possible according to the branded domain you use) will be auto-generated if you do not specify one."
+          },
+          "domain": {
+            "type": "object",
+            "description": "A reference to the Branded Domain resource for this branded short link. Specify either domain id or domain fullName or both. Make sure the domain is already active/verified and shared in this workspace.",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Branded domain's unique identifier"
+              },
+              "fullName": {
+                "type": "string",
+                "description": "Branded domain's FQDN"
+              }
+            }
+          },
+          "title": {
+            "type": "string",
+            "description": "A title you assign to the branded short link in order to remember what's behind it. A random title will be assigned to the link if you do not specify one."
+          }
+        }
+      },
+      "LinkUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "destination": {
+            "type": "string",
+            "description": "The destination URL you want your branded short link to point to. Example: https://google.com"
+          },
+          "title": {
+            "type": "string",
+            "description": "A title you assign to the branded short link in order to remember what's behind it."
+          }
+        }
+      },
+      "LinksDeletionRequest": {
+        "type": "object",
+        "required": [
+          "links"
+        ],
+        "properties": {
+          "links": {
+            "type": "array",
+            "description": "List of ids (max 25) of the link you want to delete",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "LinksDeletionResponse": {
+        "type": "object",
+        "properties": {
+          "links": {
+            "type": "array",
+            "description": "List of ids of the link that have just been deleted",
+            "items": {
+              "type": "string"
+            }
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of links that have just been deleted"
+          }
+        }
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "fffa4cc5b6ee45d6g7897b06ac2d16af"
+          },
+          "title": {
+            "type": "string",
+            "example": "What is Rebrandly"
+          },
+          "slashtag": {
+            "type": "string",
+            "example": "video"
+          },
+          "destination": {
+            "type": "string",
+            "example": "https://www.youtube.com/watch?v=3VmtibKpmXI"
+          },
+          "createdAt": {
+            "type": "string",
+            "example": "2016-07-13T10:54:12.000Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "example": "2016-07-13T10:54:12.000Z"
+          },
+          "shortUrl": {
+            "type": "string",
+            "example": "rebrand.ly/video"
+          },
+          "domain": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "example": "8f104cc5b6ee4a4ba7897b06ac2ddcfb"
+              },
+              "fullName": {
+                "type": "string",
+                "example": "rebrand.ly"
+              }
+            }
+          }
+        }
+      },
+      "SharedDomain": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "ddda4cc5b6ee45d6g7897b06ac2d1ain"
+          },
+          "fullName": {
+            "type": "string",
+            "example": "acme.com"
+          }
+        }
+      },
+      "NotFound": {
+        "type": "object",
+        "properties": {
+          "property": {
+            "type": "string",
+            "example": "domain.id"
+          },
+          "message": {
+            "type": "string",
+            "example": "Not found"
+          },
+          "code": {
+            "type": "string",
+            "example": "NotFound"
+          }
+        }
+      },
+      "AlreadyExists": {
+        "type": "object",
+        "properties": {
+          "property": {
+            "type": "string",
+            "example": "slashtag"
+          },
+          "message": {
+            "type": "string",
+            "example": "Already exists"
+          },
+          "code": {
+            "type": "string",
+            "example": "AlreadyExists"
+          }
+        }
+      },
+      "CountResult": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "example": 42,
+            "default": 0
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "viaApikey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "apikey"
+      }
+    }
+  },
+  "security": [
+    {
+      "viaApikey": []
+    }
+  ],
+  "paths": {
+    "/v1/links": {
+      "post": {
+        "summary": "/v1/links",
+        "description": "Create a new link",
+        "operationId": "createLink",
+        "parameters": [
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to be used to create links. No workspace specified will select default workspace, but we recommend your integration is workspaces-aware.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "destination"
+                ],
+                "properties": {
+                  "destination": {
+                    "type": "string",
+                    "description": "The destination URL you want your branded short link to point to. Example: https://google.com"
+                  },
+                  "slashtag": {
+                    "type": "string",
+                    "description": "The keyword portion of your branded short link. A random one (as short as possible according to the branded domain you use) will be auto-generated if you do not specify one."
+                  },
+                  "domain": {
+                    "type": "object",
+                    "description": "A reference to the Branded Domain resource for this branded short link. Specify either domain id or domain fullName or both. Make sure the domain is already active/verified and shared in this workspace.",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "Branded domain's unique identifier"
+                      },
+                      "fullName": {
+                        "type": "string",
+                        "description": "Branded domain's FQDN"
+                      }
+                    }
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "A title you assign to the branded short link in order to remember what's behind it. A random title will be assigned to the link if you do not specify one."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "fffa4cc5b6ee45d6g7897b06ac2d16af"
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "What is Rebrandly"
+                    },
+                    "slashtag": {
+                      "type": "string",
+                      "example": "video"
+                    },
+                    "destination": {
+                      "type": "string",
+                      "example": "https://www.youtube.com/watch?v=3VmtibKpmXI"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2016-07-13T10:54:12.000Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2016-07-13T10:54:12.000Z"
+                    },
+                    "shortUrl": {
+                      "type": "string",
+                      "example": "rebrand.ly/video"
+                    },
+                    "domain": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "8f104cc5b6ee4a4ba7897b06ac2ddcfb"
+                        },
+                        "fullName": {
+                          "type": "string",
+                          "example": "rebrand.ly"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "403",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "slashtag"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Already exists"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "AlreadyExists"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "summary": "/v1/links",
+        "description": "Get a list of links",
+        "operationId": "getLinks",
+        "parameters": [
+          {
+            "name": "domain.id",
+            "in": "query",
+            "description": "Filter branded short links which refer to a specific branded domain id (or specify a comma-separated set of ids)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "domain.fullName",
+            "in": "query",
+            "description": "Filter branded short links which refer to a specific branded domain's name (FQDN)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "slashtag",
+            "in": "query",
+            "description": "Filter branded short links according to their slashtag value. Use in conjunction with domain.id or domain.fullName parameter to get a specific link. WARNING: this will not take effect if you don't specify also a domain.id or a domain.fullName along with the request",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "creator.id",
+            "in": "query",
+            "description": "Filter branded short links which have been created by a specific teammate id (or specify a comma-separated set of ids)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateFrom",
+            "in": "query",
+            "description": "Filter branded short links according to the date they have been created, so as to exclude links created before this date. Format is YYYY-MM-DD.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dateTo",
+            "in": "query",
+            "description": "Filter branded short links according to the date they have been created, so as to exclude links created after this date. Format is YYYY-MM-DD.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Sorting criteria to apply to your branded short links collection among `createdAt`, `updatedAt`.",
+            "schema": {
+              "type": "string",
+              "default": "createdAt"
+            }
+          },
+          {
+            "name": "orderDir",
+            "in": "query",
+            "description": "Sorting direction to apply to your branded short links collection",
+            "schema": {
+              "type": "string",
+              "default": "desc"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "How many branded short links to load (max: 25)",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to filter links by. No workspace specified will select default workspace (if any).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "last",
+            "in": "query",
+            "description": "The id of the last link you fetched, see Infinite Scrolling section",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "fffa4cc5b6ee45d6g7897b06ac2d16af"
+                      },
+                      "title": {
+                        "type": "string",
+                        "example": "What is Rebrandly"
+                      },
+                      "slashtag": {
+                        "type": "string",
+                        "example": "video"
+                      },
+                      "destination": {
+                        "type": "string",
+                        "example": "https://www.youtube.com/watch?v=3VmtibKpmXI"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2016-07-13T10:54:12.000Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2016-07-13T10:54:12.000Z"
+                      },
+                      "shortUrl": {
+                        "type": "string",
+                        "example": "rebrand.ly/video"
+                      },
+                      "domain": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "8f104cc5b6ee4a4ba7897b06ac2ddcfb"
+                          },
+                          "fullName": {
+                            "type": "string",
+                            "example": "rebrand.ly"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "summary": "/v1/links",
+        "description": "Delete multiple links in bulk",
+        "operationId": "deleteLinks",
+        "parameters": [
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "The id of the workspace where links were created. No workspace specified will select default workspace, but we recommend your integration is workspaces-aware.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "links"
+                ],
+                "properties": {
+                  "links": {
+                    "type": "array",
+                    "description": "List of ids (max 25) of the link you want to delete",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "links": {
+                      "type": "array",
+                      "description": "List of ids of the link that have just been deleted",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "count": {
+                      "type": "integer",
+                      "description": "Number of links that have just been deleted"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/domains": {
+      "get": {
+        "summary": "/v1/domains",
+        "description": "Get the list of domains shared in the current workspace.",
+        "operationId": "getSharedDomains",
+        "parameters": [
+          {
+            "name": "active",
+            "in": "query",
+            "description": "Filter branded domains depending on whether they can be used to brand short links or not",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Sorting criteria to apply to your branded domains collection among `createdAt`, `updatedAt` and `fullName`.",
+            "schema": {
+              "type": "string",
+              "default": "createdAt"
+            }
+          },
+          {
+            "name": "orderDir",
+            "in": "query",
+            "description": "Sorting direction to apply to your branded short links collection among `desc` and `asc`.",
+            "schema": {
+              "type": "string",
+              "default": "desc"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "How many branded domains to load (max: 25)",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "last",
+            "in": "query",
+            "description": "The id of the last domain you fetched, see Infinite Scrolling section",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to filter shared domains by.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "ddda4cc5b6ee45d6g7897b06ac2d1ain"
+                      },
+                      "fullName": {
+                        "type": "string",
+                        "example": "acme.com"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/links/{id}": {
+      "get": {
+        "summary": "/v1/links/:id",
+        "description": "Get details about a specific link (don't know the ID? Fetch it using GET /v1/links)",
+        "operationId": "getLink",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the branded short link you want to get details for",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Workspace where the link has been created",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "fffa4cc5b6ee45d6g7897b06ac2d16af"
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "What is Rebrandly"
+                    },
+                    "slashtag": {
+                      "type": "string",
+                      "example": "video"
+                    },
+                    "destination": {
+                      "type": "string",
+                      "example": "https://www.youtube.com/watch?v=3VmtibKpmXI"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2016-07-13T10:54:12.000Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2016-07-13T10:54:12.000Z"
+                    },
+                    "shortUrl": {
+                      "type": "string",
+                      "example": "rebrand.ly/video"
+                    },
+                    "domain": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "8f104cc5b6ee4a4ba7897b06ac2ddcfb"
+                        },
+                        "fullName": {
+                          "type": "string",
+                          "example": "rebrand.ly"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "summary": "/v1/links/:id",
+        "description": "Update a specific link (don't know the ID? Fetch it using GET /v1/links).\nMind that in a Link entity you cannot change the domain and/or the slashtag after creation time. You will need to create another Link.",
+        "operationId": "update-link-endpoint",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the branded short link you want to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to filter links by. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "destination": {
+                    "type": "string",
+                    "description": "The destination URL you want your branded short link to point to. Example: https://google.com"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "A title you assign to the branded short link in order to remember what's behind it."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "fffa4cc5b6ee45d6g7897b06ac2d16af"
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "What is Rebrandly"
+                    },
+                    "slashtag": {
+                      "type": "string",
+                      "example": "video"
+                    },
+                    "destination": {
+                      "type": "string",
+                      "example": "https://www.youtube.com/watch?v=3VmtibKpmXI"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2016-07-13T10:54:12.000Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2016-07-13T10:54:12.000Z"
+                    },
+                    "shortUrl": {
+                      "type": "string",
+                      "example": "rebrand.ly/video"
+                    },
+                    "domain": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "8f104cc5b6ee4a4ba7897b06ac2ddcfb"
+                        },
+                        "fullName": {
+                          "type": "string",
+                          "example": "rebrand.ly"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "summary": "/v1/links/:id",
+        "description": "Delete a specific link (don't know the ID? Fetch it using GET /v1/links)",
+        "operationId": "delete-link-endpoint",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the link you want to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to filter links by. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "fffa4cc5b6ee45d6g7897b06ac2d16af"
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "What is Rebrandly"
+                    },
+                    "slashtag": {
+                      "type": "string",
+                      "example": "video"
+                    },
+                    "destination": {
+                      "type": "string",
+                      "example": "https://www.youtube.com/watch?v=3VmtibKpmXI"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2016-07-13T10:54:12.000Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2016-07-13T10:54:12.000Z"
+                    },
+                    "shortUrl": {
+                      "type": "string",
+                      "example": "rebrand.ly/video"
+                    },
+                    "domain": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "8f104cc5b6ee4a4ba7897b06ac2ddcfb"
+                        },
+                        "fullName": {
+                          "type": "string",
+                          "example": "rebrand.ly"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/domains/{id}": {
+      "get": {
+        "summary": "/v1/domains/:id",
+        "description": "Get details about a specific domain shared in the workspace",
+        "operationId": "getSharedDomain",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the branded domain you want to get details about",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to filter domains by. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "ddda4cc5b6ee45d6g7897b06ac2d1ain"
+                    },
+                    "fullName": {
+                      "type": "string",
+                      "example": "acme.com"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/links/count": {
+      "get": {
+        "summary": "/v1/links/count",
+        "description": "Get how many links with given filtering conditions",
+        "operationId": "countLinks",
+        "parameters": [
+          {
+            "name": "favourite",
+            "in": "query",
+            "description": "Filter branded short links depnding on the favourite (loved) property",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "domain.id",
+            "in": "query",
+            "description": "Filter branded short links which refer to a specific branded domain id",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to filter links by. No workspace specified will select default workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer",
+                      "example": 42,
+                      "default": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/tags/{id}": {
+      "delete": {
+        "summary": "/v1/tags/:id",
+        "description": "Delete a specific tag",
+        "operationId": "deleteTag",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the tag you want to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to filter tags by. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "fffa4cc5b6ee45d6g7897b06ac2d16af"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "promo"
+                    },
+                    "color": {
+                      "type": "string",
+                      "example": "FF0044"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "get": {
+        "summary": "/v1/tags/:id",
+        "description": "Get details about a specific tag",
+        "operationId": "tag-details-endpoint",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the tag you want to get details for",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to filter links by. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "fffa4cc5b6ee45d6g7897b06ac2d16af"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "promo"
+                    },
+                    "color": {
+                      "type": "string",
+                      "example": "FF0044"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "summary": "/v1/tags/:id",
+        "description": "Update a tag",
+        "operationId": "update-tag-endpoint",
+        "parameters": [
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "The workspace unique identifier of the workspace where the tag has been created. If the tag is in the main workspace, no workspace header must be specified.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the Tag resource you want to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "color"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The new name you want to associated to the tag"
+                  },
+                  "color": {
+                    "type": "string",
+                    "description": "The hexadecimal code for a new color you want to assign to the tag"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "fffa4cc5b6ee45d6g7897b06ac2d16af"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "promo"
+                    },
+                    "color": {
+                      "type": "string",
+                      "example": "FF0044"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/domains/count": {
+      "get": {
+        "summary": "/v1/domains/count",
+        "description": "Get how many domains with given filtering conditions",
+        "operationId": "countSharedDomains",
+        "parameters": [
+          {
+            "name": "active",
+            "in": "query",
+            "description": "Filter branded domains depending on whether they can be used to branded short links or not",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filter branded domains depending on their type (own by `user` or `service` domains like rebrand.ly)",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to filter domains by. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer",
+                      "example": 42,
+                      "default": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/account": {
+      "get": {
+        "summary": "/v1/account",
+        "description": "Get account details",
+        "operationId": "getAccount",
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "3aehje9d536s46d59ba5bcf49b582ear"
+                    },
+                    "fullName": {
+                      "type": "string",
+                      "example": "Stanford University"
+                    },
+                    "username": {
+                      "type": "string",
+                      "example": "fake@stanford.edu"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "fake@stanford.edu"
+                    },
+                    "avatarUrl": {
+                      "type": "string",
+                      "example": "https://avatars.rebrandly.com/account/3aehje9d536s46d59ba5bcf49b582ear"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2016-07-13T10:54:12.000Z"
+                    },
+                    "subscription": {
+                      "type": "object",
+                      "properties": {
+                        "createdAt": {
+                          "type": "string",
+                          "example": "2016-07-13T10:54:12.000Z"
+                        },
+                        "limits": {
+                          "type": "object",
+                          "properties": {
+                            "links": {
+                              "type": "object",
+                              "properties": {
+                                "used": {
+                                  "type": "integer",
+                                  "example": 7504,
+                                  "default": 0
+                                },
+                                "max": {
+                                  "type": "integer",
+                                  "example": 10000,
+                                  "default": 0
+                                }
+                              }
+                            },
+                            "domains": {
+                              "type": "object",
+                              "properties": {
+                                "used": {
+                                  "type": "integer",
+                                  "example": 17,
+                                  "default": 0
+                                },
+                                "max": {
+                                  "type": "integer",
+                                  "example": 100,
+                                  "default": 0
+                                }
+                              }
+                            },
+                            "workspaces": {
+                              "type": "object",
+                              "properties": {
+                                "used": {
+                                  "type": "integer",
+                                  "example": 1,
+                                  "default": 0
+                                },
+                                "max": {
+                                  "type": "integer",
+                                  "example": 50,
+                                  "default": 0
+                                }
+                              }
+                            },
+                            "teammates": {
+                              "type": "object",
+                              "properties": {
+                                "used": {
+                                  "type": "integer",
+                                  "example": 5,
+                                  "default": 0
+                                },
+                                "max": {
+                                  "type": "integer",
+                                  "example": 100,
+                                  "default": 0
+                                }
+                              }
+                            },
+                            "tags": {
+                              "type": "object",
+                              "properties": {
+                                "used": {
+                                  "type": "integer",
+                                  "example": 0,
+                                  "default": 0
+                                },
+                                "max": {
+                                  "type": "integer",
+                                  "example": 50,
+                                  "default": 0
+                                }
+                              }
+                            },
+                            "scripts": {
+                              "type": "object",
+                              "properties": {
+                                "used": {
+                                  "type": "integer",
+                                  "example": 0,
+                                  "default": 0
+                                },
+                                "max": {
+                                  "type": "integer",
+                                  "example": 50,
+                                  "default": 0
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/links/new": {
+      "get": {
+        "summary": "/v1/links/new",
+        "description": "Create a new link",
+        "operationId": "createExpressLink",
+        "parameters": [
+          {
+            "name": "destination",
+            "in": "query",
+            "description": "The destination URL you want your branded short link to point to",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "slashtag",
+            "in": "query",
+            "description": "The keyword portion of your branded short link",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "description": "A title you assign to the branded short link in order to remember what's behind it",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "domain[id]",
+            "in": "query",
+            "description": "The unique id of the branded domain. If not specified, rebrand.ly is used",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "domain[fullName]",
+            "in": "query",
+            "description": "The unique name of the branded domain, to be used in place of domain[id] in special cases. Precedence will be given to domain[id] value.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to be used to create new links. No workspace specified will select default workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "fffa4cc5b6ee45d6g7897b06ac2d16af"
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "What is Rebrandly"
+                    },
+                    "slashtag": {
+                      "type": "string",
+                      "example": "video"
+                    },
+                    "destination": {
+                      "type": "string",
+                      "example": "https://www.youtube.com/watch?v=3VmtibKpmXI"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2016-07-13T10:54:12.000Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2016-07-13T10:54:12.000Z"
+                    },
+                    "shortUrl": {
+                      "type": "string",
+                      "example": "rebrand.ly/video"
+                    },
+                    "domain": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "example": "8f104cc5b6ee4a4ba7897b06ac2ddcfb"
+                        },
+                        "fullName": {
+                          "type": "string",
+                          "example": "rebrand.ly"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "403",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "slashtag"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Already exists"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "AlreadyExists"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "x-readme": {
+          "code-samples": [
+            {
+              "language": "text",
+              "code": "https://api.rebrandly.com/v1/links/new?apikey=YOUR_API_KEY&destination=http://google.com&domain[fullName]=rebrand.ly",
+              "name": "Paste in your browser"
+            }
+          ],
+          "samples-languages": [
+            "text"
+          ]
+        }
+      }
+    },
+    "/v1/workspaces": {
+      "get": {
+        "summary": "/v1/workspaces",
+        "description": "Get all workspaces you either own or partecipate into as a member",
+        "operationId": "getSharedWorkspaces",
+        "parameters": [
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Sorting criteria to apply to your workspaces collection among `name`, `createdAt` and `updatedAt`.",
+            "schema": {
+              "type": "string",
+              "default": "createdAt"
+            }
+          },
+          {
+            "name": "orderDir",
+            "in": "query",
+            "description": "Sorting direction to apply to your workspaces collection",
+            "schema": {
+              "type": "string",
+              "default": "desc"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "How many workspaces to load (max: 25)",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "last",
+            "in": "query",
+            "description": "The id of the last workspace you fetched, see Infinite Scrolling section",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "fffa4cc5b6ee45d6g7897b06ac2d16af"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Marketing"
+                    },
+                    "avatarUrl": {
+                      "type": "string",
+                      "example": "https://avatars.rebrandly.com/workspace/fffa4cc5b6ee45d6g7897b06ac2d16af"
+                    },
+                    "role": {
+                      "type": "string",
+                      "example": "admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/tags": {
+      "get": {
+        "summary": "/v1/tags",
+        "description": "Get a list of tags",
+        "operationId": "getTags",
+        "parameters": [
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Sorting criteria to apply to your tags collection. The only available option is by `name` property.",
+            "schema": {
+              "type": "string",
+              "default": "name"
+            }
+          },
+          {
+            "name": "orderDir",
+            "in": "query",
+            "description": "Sorting direction to apply to your tags collection",
+            "schema": {
+              "type": "string",
+              "default": "desc"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "How many tags to load (max: 25)",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "last",
+            "in": "query",
+            "description": "The id of the last tag you fetched, see Infinite Scrolling section",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to filter tags by. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "fffa4cc5b6ee45d6g7897b06ac2d16af"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "promo"
+                      },
+                      "color": {
+                        "type": "string",
+                        "example": "FF0044"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "summary": "/v1/tags",
+        "description": "Create a new tag",
+        "operationId": "create-tag-endpoint",
+        "parameters": [
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to be used to create tags. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "color"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name you want to associated to the tag"
+                  },
+                  "color": {
+                    "type": "string",
+                    "description": "The hexadecimal code for a color you want to assign to the tag"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "fffa4cc5b6ee45d6g7897b06ac2d16af"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "promo"
+                    },
+                    "color": {
+                      "type": "string",
+                      "example": "FF0044"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/tags/count": {
+      "get": {
+        "summary": "/v1/tags/count",
+        "description": "Get how many tags with given filtering conditions",
+        "operationId": "countTags",
+        "parameters": [
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to filter tags by. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer",
+                      "example": 42,
+                      "default": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/links/{id}/tags": {
+      "get": {
+        "summary": "/v1/links/:id/tags",
+        "description": "Get all tags attached to a specific link",
+        "operationId": "getLinkTags",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the Link resource",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "orderDir",
+            "in": "query",
+            "description": "Sorting direction to apply to your tags collection",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Sorting criteria to apply to your tags collection. The only available option is by `name` property.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "How many tags to load (max: 25)",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "last",
+            "in": "query",
+            "description": "The id of the last tag you fetched, see Infinite Scrolling section",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to filter links by. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "fffa4cc5b6ee45d6g7897b06ac2d16af"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "promo"
+                      },
+                      "color": {
+                        "type": "string",
+                        "example": "FF0044"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/links/{id}/tags/{tag}": {
+      "post": {
+        "summary": "/v1/links/:id/tags/:tag",
+        "description": "Attach a tag to a link",
+        "operationId": "attachTag",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the Link resource",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "tag",
+            "in": "path",
+            "description": "Unique identifier of the Tag resource",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id the link and tag belong to. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "summary": "/v1/links/:id/tags/:tag",
+        "description": "Detach a tag from a link",
+        "operationId": "detachTag",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the Link resource",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "tag",
+            "in": "path",
+            "description": "Unique identifier of the Tag resource",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id the link and tag belong to. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/links/{id}/scripts": {
+      "get": {
+        "summary": "/v1/links/:id/scripts",
+        "description": "Get all scripts attached to a specific link",
+        "operationId": "getLinkScripts",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the Link resource",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "orderDir",
+            "in": "query",
+            "description": "Sorting direction to apply to your scripts collection",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Sorting criteria to apply to your scripts collection. The only available option is by `name` property.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "How many scripts to load (max: 25)",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "last",
+            "in": "query",
+            "description": "The id of the last script you fetched, see Infinite Scrolling section",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to filter links by. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "ftag4cc5b6ee45d6g7897b06ac2d16af"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Test alert"
+                      },
+                      "uri": {
+                        "type": "string",
+                        "example": "https://custom.rebrandly.com/user/abcdecc5b6ee45d6g7897b06ac2d1xyz"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/links/{id}/scripts/{script}": {
+      "post": {
+        "summary": "/v1/links/:id/scripts/:script",
+        "description": "Attach a retargeting script to a link",
+        "operationId": "attachScript",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the Link resource",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "script",
+            "in": "path",
+            "description": "Unique identifier of the Script resource",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id the link and tag belong to. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "summary": "/v1/links/:id/scripts/:script",
+        "description": "Detach a script from a link",
+        "operationId": "detachScript",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the Link resource",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "script",
+            "in": "path",
+            "description": "Unique identifier of the Script resource",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id the link and tag belong to. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/scripts": {
+      "get": {
+        "summary": "/v1/scripts",
+        "description": "Get a list of scripts",
+        "operationId": "getScripts",
+        "parameters": [
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Sorting criteria to apply to your scripts collection. The only available option is by `name` property.",
+            "schema": {
+              "type": "string",
+              "default": "name"
+            }
+          },
+          {
+            "name": "orderDir",
+            "in": "query",
+            "description": "Sorting direction to apply to your scripts collection",
+            "schema": {
+              "type": "string",
+              "default": "desc"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "How many scripts to load (max: 25)",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          },
+          {
+            "name": "last",
+            "in": "query",
+            "description": "The id of the last script you fetched, see Infinite Scrolling section",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to filter scripts by. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "ftag4cc5b6ee45d6g7897b06ac2d16af"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "Test alert"
+                      },
+                      "uri": {
+                        "type": "string",
+                        "example": "https://custom.rebrandly.com/user/abcdecc5b6ee45d6g7897b06ac2d1xyz"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "summary": "/v1/scripts",
+        "description": "Create a new script",
+        "operationId": "create-script-endpoint",
+        "parameters": [
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to be used to create scripts. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "value"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The name you want to associated to the script"
+                  },
+                  "value": {
+                    "type": "string",
+                    "description": "A javascript snippet (including <script> and </script> HTML tags)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "ftag4cc5b6ee45d6g7897b06ac2d16af"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Test alert"
+                    },
+                    "uri": {
+                      "type": "string",
+                      "example": "https://custom.rebrandly.com/user/abcdecc5b6ee45d6g7897b06ac2d1xyz"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/scripts/{id}": {
+      "get": {
+        "summary": "/v1/scripts/:id",
+        "description": "Get details about a specific script",
+        "operationId": "getScript",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the script you want to get details for",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to filter scripts by. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "ftag4cc5b6ee45d6g7897b06ac2d16af"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Test alert"
+                    },
+                    "uri": {
+                      "type": "string",
+                      "example": "https://custom.rebrandly.com/user/abcdecc5b6ee45d6g7897b06ac2d1xyz"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "summary": "/v1/scripts/:id",
+        "description": "Delete a specific script",
+        "operationId": "delete-script-endpoint",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the script you want to delete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to filter scripts by. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "ftag4cc5b6ee45d6g7897b06ac2d16af"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Test alert"
+                    },
+                    "uri": {
+                      "type": "string",
+                      "example": "https://custom.rebrandly.com/user/abcdecc5b6ee45d6g7897b06ac2d1xyz"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "404",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "property": {
+                      "type": "string",
+                      "example": "domain.id"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Not found"
+                    },
+                    "code": {
+                      "type": "string",
+                      "example": "NotFound"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "post": {
+        "summary": "/v1/scripts/:id",
+        "description": "Update a script",
+        "operationId": "update-script-endpoint",
+        "parameters": [
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "The workspace unique identifier of the workspace where the script has been created. If the script is in the main workspace, no workspace header must be specified.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier of the Script resource you want to update",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "value"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "The new name you want to associated to the script"
+                  },
+                  "value": {
+                    "type": "string",
+                    "description": "A new javascript snippet (including <script> and </script> HTML tags) to replace the old one"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "ftag4cc5b6ee45d6g7897b06ac2d16af"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "Test alert"
+                    },
+                    "uri": {
+                      "type": "string",
+                      "example": "https://custom.rebrandly.com/user/abcdecc5b6ee45d6g7897b06ac2d1xyz"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/v1/scripts/count": {
+      "get": {
+        "summary": "/v1/scripts/count",
+        "description": "Get how many scripts with given filtering conditions",
+        "operationId": "countScripts",
+        "parameters": [
+          {
+            "name": "workspace",
+            "in": "header",
+            "description": "Which workspace id to filter scripts by. No workspace specified will select main workspace.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "integer",
+                      "example": 42,
+                      "default": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true,
+    "samples-enabled": true
+  }
+}

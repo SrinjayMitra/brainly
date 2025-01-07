@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "apis": [
+    {
+      "identifier": "rebrandly",
+      "source": "@rebrandly/v1#e2atm3ll8vifbnh",
+      "integrity": "sha512-RU83vrWTpJk8aZ0zOjERIxc2Jc3txedhCNSiwEG+q0xCTMWoc01kxg7uQdtWVXpzIkIfW71o2XAn8+mfV1S8sQ==",
+      "installerVersion": "6.1.2"
+    }
+  ]
+}
