@@ -119,9 +119,17 @@ export function Dashboard() {
            /> */}
         
         
-        {(
+        
+        {content.length === 0 ? (
+      <div className="flex items-center justify-center min-h-screen w-full overflow-x-hidden">
+      <div className="text-center p-6 bg-white rounded-lg shadow-md ">
+        <h2 className="text-2xl font-semibold text-gray-800">No Content Found</h2>
+        <p className="mt-4 text-gray-600">Sorry, we couldn't find any content. Try adding some.</p>
+      </div>
+    </div>
+        ) :(
   content.map(({ _id,type, link, description, title, tags ,addedDate }) => {
-    
+    if(content.length == 0) {}
     return (
       <MyCard
         key={_id} // Consider using a unique key like _id if available

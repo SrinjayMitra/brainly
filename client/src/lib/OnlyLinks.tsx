@@ -74,7 +74,14 @@ export function OnlyLinks() {
 
         <div className="flex space-x-5 ml-52 p-3 min-h-screen flex-wrap space-y-3">
           
-        {(
+        {content.filter(({ type }) => type === 'link').length === 0 ? (
+  <div className="flex items-center justify-center min-h-screen w-full overflow-x-hidden">
+    <div className="text-center p-6 bg-white rounded-lg shadow-md">
+      <h2 className="text-2xl font-semibold text-gray-800">No Content Found</h2>
+      <p className="mt-4 text-gray-600">Sorry, we couldn't find any content. Try adding some.</p>
+    </div>
+  </div>
+) :(
   content
   .filter(({ type }) => type === 'link')
   .map(({ _id,type, link, description, title, tags ,addedDate }) => {
