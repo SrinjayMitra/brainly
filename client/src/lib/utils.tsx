@@ -4,7 +4,7 @@ import axios from 'axios'
 
 
 // const navigate = useNavigate();
-export const BACKENDURL = "http://localhost:3000/api/v1";
+export const BACKENDURL = "https://brainly-alpha.vercel.app/api/v1";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
