@@ -1,0 +1,22 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "src/be.ts",
+        "use": "@vercel/node",
+        "config": {
+          "typescript": {
+            "tsconfigPath": "./tsconfig.json"
+          }
+        }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/src/(.*)",
+        "dest": "/src/index.ts"
+      }
+    ]
+   
+  }
+  
