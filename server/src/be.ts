@@ -10,8 +10,8 @@ import { verifyPassword } from "./helpers";
 import { Request,Response } from "express";
 import cors from 'cors';
 import { ServerDescription } from "mongodb";
-
-
+import { URL } from "./config";
+const BACKENDURL = URL;
 const app = express();
 app.use(express.json())
 app.use(cors());
@@ -206,7 +206,7 @@ app.delete("/api/v1/content",checkUser, async (req,res) =>{
       }
     });
 
-
+ /// shareModal API
    app.get("/api/v1/getShareLink", checkUser , async (req,res) => {
       //@ts-ignore
       const userId = req.userId;
@@ -217,6 +217,7 @@ app.delete("/api/v1/content",checkUser, async (req,res) =>{
     });
    });
 
+/// card share icon api
     app.post("/api/v1/brain/shareLink",checkUser, async (req,res) =>{
         try {
             //@ts-ignore
@@ -230,7 +231,7 @@ app.delete("/api/v1/content",checkUser, async (req,res) =>{
         }
 
         else{
-            const axiosResponse = await axios.get(`http://localhost:3000/api/v1/content`, {
+            const axiosResponse = await axios.get(`${BACKENDURL}/content`, {
             headers: {
                 Authorization: req.headers["authorization"], 
             },

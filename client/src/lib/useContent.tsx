@@ -55,7 +55,7 @@ export const useContent = () => {
   
      
       const response = await axios.post(
-        `${BACKENDURL}/getToken`, 
+        `${BACKENDURL}/brain/shareLink`, 
         {
           contentId, 
         },
