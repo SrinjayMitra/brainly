@@ -22,6 +22,8 @@ const axios_1 = __importDefault(require("axios"));
 const helpers_1 = require("./helpers");
 const helpers_2 = require("./helpers");
 const cors_1 = __importDefault(require("cors"));
+const config_2 = require("./config");
+const BACKENDURL = config_2.URL;
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
@@ -184,6 +186,7 @@ app.delete("/api/v1/content", middlewares_1.checkUser, (req, res) => __awaiter(v
         res.status(500).send({ error: "Error deleting content" });
     }
 }));
+/// shareModal API
 app.get("/api/v1/getShareLink", middlewares_1.checkUser, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     //@ts-ignore
     const userId = req.userId;
@@ -194,6 +197,7 @@ app.get("/api/v1/getShareLink", middlewares_1.checkUser, (req, res) => __awaiter
         result
     });
 }));
+/// card share icon api
 app.post("/api/v1/brain/shareLink", middlewares_1.checkUser, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         //@ts-ignore
@@ -204,7 +208,7 @@ app.post("/api/v1/brain/shareLink", middlewares_1.checkUser, (req, res) => __awa
             res.status(200).send({ shortURL: existingShare.link });
         }
         else {
-            const axiosResponse = yield axios_1.default.get(`http://localhost:3000/api/v1/content`, {
+            const axiosResponse = yield axios_1.default.get(`${BACKENDURL}/content`, {
                 headers: {
                     Authorization: req.headers["authorization"],
                 },
