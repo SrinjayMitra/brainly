@@ -1,10 +1,13 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import axios from 'axios'
+import {URL} from "../backendurl"
 
 
 // const navigate = useNavigate();
-export const BACKENDURL = "https://brainly-alpha.vercel.app/api/v1";
+// export const BACKENDURL = "http://localhost:3000/api/v1";
+
+export const BACKENDURL = URL;
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
