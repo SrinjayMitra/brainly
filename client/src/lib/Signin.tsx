@@ -4,13 +4,12 @@ import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { SignInUser } from './utils';
 
-
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   //@ts-ignore
   const [error, setError] = useState<string | null>(null);
-    //@ts-ignore
+  //@ts-ignore
   const [success, setSuccess] = useState<boolean>(false);
   const [successMessage, setSuccessMessage] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -104,6 +103,16 @@ const SignIn: React.FC = () => {
             Sign In
           </Button>
         </form>
+
+        {/* Link to Sign Up page if the user doesn't have an account */}
+        <div className="mt-4 text-center">
+          <p className="text-sm text-gray-600">
+            Don't have an account?{' '}
+            <a href="/signup" className="text-blue-600 hover:underline">
+              Sign up here
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );

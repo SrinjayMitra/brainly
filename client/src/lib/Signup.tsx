@@ -8,9 +8,9 @@ const SignUp: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
-    //@ts-ignore
+  //@ts-ignore
   const [error, setError] = useState<string | null>(null);
-    //@ts-ignore
+  //@ts-ignore
   const [success, setSuccess] = useState<boolean>(false);
   const [successMessage, setSuccessMessage] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -33,7 +33,7 @@ const SignUp: React.FC = () => {
 
     try {
       const result = await SignUpUser({ email, password });
-      if (result.message == "User signed up successfully") {
+      if (result.message === "User signed up successfully") {
         setSuccess(true);
         setSuccessMessage("Account created successfully!");
         // Redirect to login page or another page
@@ -41,12 +41,12 @@ const SignUp: React.FC = () => {
           navigate("/signin"); // Example redirection to login page after successful sign up
         }, 1000);  // Redirect with a small delay to show success message
       } else {
-        setError("User signed up successfully");
+        setError("User already exists");
         setErrorMessage(result.message || "Sign up failed.");
       }
     } catch (error) {
       console.error('Sign-up failed:', error);
-      setError("User signed up successfully");
+      setError("Sign-up error");
       setErrorMessage('An error occurred while signing up.');
     }
   };
@@ -125,6 +125,18 @@ const SignUp: React.FC = () => {
             Sign Up
           </Button>
         </form>
+
+        {/* Link to Sign In page if user already exists */}
+        {errorMessage && errorMessage === "User already exists. Please sign in." && (
+          <div className="mt-4 text-center">
+            <p className="text-sm text-gray-600">
+              Already have an account?{' '}
+              <a href="/signin" className="text-blue-600 hover:underline">
+                Sign in here
+              </a>
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

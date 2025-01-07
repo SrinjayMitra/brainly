@@ -24,8 +24,12 @@ const LoaderAndRoutes = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (location.pathname == '/') {
-      navigate('/signin');  // Navigate to the '/links' page
+    if (location.pathname === '/') {
+      if (!localStorage.getItem('token')) {
+        navigate('/signup'); 
+      } else {
+        navigate('/signin'); 
+      }
     }
     // Simulate loading for 1 second when route changes
     setIsLoading(true);
