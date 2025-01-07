@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation,useNavigate } from 'react-router-dom';
 import Signup from './lib/Signup';
 import SignIn from './lib/Signin';
 import { Dashboard } from './lib/Dashboard';
@@ -20,9 +20,13 @@ function App() {
 
 const LoaderAndRoutes = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    if (location.pathname == '/') {
+      navigate('/signin');  // Navigate to the '/links' page
+    }
     // Simulate loading for 1 second when route changes
     setIsLoading(true);
     const timer = setTimeout(() => {
