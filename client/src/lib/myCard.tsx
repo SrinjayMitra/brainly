@@ -103,15 +103,23 @@ const MyCard: React.FC<DynamicCardProps> = ({
       case "youtube":
         return (
             <div className="relative w-full min-h-24 aspect-video bg-gray-200 rounded-md overflow-hidden">
-                 {content = content.replace("/watch?v=","/embed/" )}
-            <iframe
-              src={content}
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-              className="absolute inset-0 w-full h-full"
-            ></iframe>
+               {(() => {
+    if (content.includes("youtu.be/")) {
+      content = content.replace(/.*youtu\.be\//, "https://www.youtube.com/embed/");
+    } else if (content.includes("youtube.com/watch?v=")) {
+      content = content.replace("/watch?v=", "/embed/");
+    }
+    return (
+      <iframe
+        src={content}
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+        className="absolute inset-0 w-full h-full"
+      ></iframe>
+    );
+  })()}
         <div className="no-scrollbar text-pretty text-sm overflow-auto p-4 rounded-md ">
         <a 
               href={content}
