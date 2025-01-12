@@ -24,6 +24,11 @@ const helpers_2 = require("./helpers");
 const cors_1 = __importDefault(require("cors"));
 const config_2 = require("./config");
 const BACKENDURL = config_2.URL;
+//@ts-ignore
+const sdk_1 = __importDefault(require("@anthropic-ai/sdk"));
+const anthropic = new sdk_1.default({
+    apiKey: config_2.ANTHROPIC_API_KEY, // defaults to process.env["ANTHROPIC_API_KEY"]
+});
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
@@ -269,6 +274,38 @@ app.get("/api/v1/brain/:shareToken", (req, res) => __awaiter(void 0, void 0, voi
         //@ts-ignore
         console.error("Error fetching shared links:", error.message);
         res.status(500).json({ error: "Internal server error" });
+    }
+}));
+app.get("/api/v1/chat", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const message = req.body.message;
+    try {
+        // Send a POST request to the Gemii API (replace with the actual endpoint)
+        const response = yield axios_1.default.post(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${config_2.GEMINI_API_KEY}`, {
+            contents: [
+                {
+                    parts: [
+                        { text: message } // Use the incoming message here
+                    ]
+                }
+            ]
+        }, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        // const response  = await anthropic.messages.create({
+        //   model: "claude-3-5-sonnet-20241022",
+        //   max_tokens: 1024,
+        //   messages: [{ role: "user", content: message }],
+        // });
+        // Handle the response from Gemii
+        res.status(200).json({
+            mssg: response.data // Forward the data from Gemii's response
+        });
+    }
+    catch (error) {
+        // Handle errors
+        console.error(error);
     }
 }));
 app.listen(3000);
