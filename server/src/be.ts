@@ -309,6 +309,50 @@ app.get("/api/v1/brain/:shareToken", async (req,res)   => {
 
 app.get("/api/v1/chat", async (req, res) => {
   const message = req.query.message as string;
+  const prePrompts = [
+    { text: "You are an AI assistant that manages and provides information about various content, including videos, tweets, links, and general topics. Be precise and concise in your responses. but also give a litlle extra info" },
+    { text: "For videos, provide a brief summary or relevant details." },
+    { text: "For tweets, include the tweet content, author, and relevant hashtags." },
+    { text: "give to the point answers but also hallucinate a bit but remember to answer the question every time in detail" },
+    { text: "For links, give a short description of the content they lead to." },
+    { text: "For other topics, provide a  overview (under 80 words)." },
+    { text: "Ensure responses are clear, accurate, and to the point." },
+    { text: "Respond only in plain text, without any formatting such as bold, italics, or markdown." },
+    {
+      text: `Avoid using any special characters in your answers, including but not limited to:
+    - ** (asterisks)
+    - _ (underscores)
+    - # (hash/pound)
+    - * (asterisks)
+    - ~ (tilde)
+    - \` (backticks)
+    - [] (square brackets)
+    - {} (curly braces)
+    - () (parentheses)
+    - < > (angle brackets)
+    - ! (exclamation mark)
+    - @ (at symbol)
+    - $ (dollar sign)
+    - % (percent)
+    - ^ (caret)
+    - & (ampersand)
+    - = (equals sign)
+    - + (plus sign)
+    - | (pipe)
+    - ; (semicolon)
+    - : (colon)
+    - ' (single quotes)
+    - " (double quotes)
+    - / (forward slash)
+    - \\ (backslash)
+    - , (comma)
+    - . (period)
+    - ? (question mark)
+    - ~ (tilde)`
+    }
+    
+    
+  ];
   try {
       // Send a POST request to the Gemii API (replace with the actual endpoint)
       const response = await axios.post(
@@ -317,6 +361,7 @@ app.get("/api/v1/chat", async (req, res) => {
             contents: [
                 {
                     parts: [
+                        ...prePrompts,
                         { text: message } // Use the incoming message here
                     ]
                 }
