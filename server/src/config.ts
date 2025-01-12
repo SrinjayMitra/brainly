@@ -8,7 +8,7 @@ export const uri = process.env.MONGO_URI;
 export const TINY_API_KEY = process.env.TINY_API_KEY;
 export const apiUrl = `https://api.tinyurl.com/create?api_token=${TINY_API_KEY}`;
 export const GEMINI_API_KEY = "AIzaSyD11h0GeflTWBWy-ca5HK83UuLM_nSrMCY";
-// export const ANTHROPIC_API_KEY='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'
+
 
 
 
