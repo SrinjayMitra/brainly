@@ -10,8 +10,14 @@ import { verifyPassword } from "./helpers";
 import { Request,Response } from "express";
 import cors from 'cors';
 import { ServerDescription } from "mongodb";
-import { URL } from "./config";
+import { URL,GEMINI_API_KEY,ANTHROPIC_API_KEY } from "./config";
 const BACKENDURL = URL;
+//@ts-ignore
+import Anthropic from '@anthropic-ai/sdk';
+
+const anthropic = new Anthropic({
+  apiKey: ANTHROPIC_API_KEY, // defaults to process.env["ANTHROPIC_API_KEY"]
+});
 const app = express();
 app.use(express.json())
 app.use(cors());
@@ -303,6 +309,47 @@ app.get("/api/v1/brain/:shareToken", async (req,res)   => {
      res.status(500).json({ error: "Internal server error" });
   }
 });     
+
+
+app.get("/api/v1/chat", async (req, res) => {
+  const message = req.body.message;
+  try {
+      // Send a POST request to the Gemii API (replace with the actual endpoint)
+      const response = await axios.post(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+        {
+            contents: [
+                {
+                    parts: [
+                        { text: message } // Use the incoming message here
+                    ]
+                }
+            ]
+        },
+        {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+    );
+
+
+    // const response  = await anthropic.messages.create({
+    //   model: "claude-3-5-sonnet-20241022",
+    //   max_tokens: 1024,
+    //   messages: [{ role: "user", content: message }],
+    // });
+
+      // Handle the response from Gemii
+      res.status(200).json({
+          mssg:response.data// Forward the data from Gemii's response
+      });
+  } catch (error) {
+      // Handle errors
+      console.error(error);
+     
+  }
+});
 
       
 app.listen(3000);

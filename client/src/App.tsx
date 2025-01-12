@@ -10,6 +10,7 @@ import { OnlyLinks } from './lib/OnlyLinks';
 import { OnlyVideos } from './lib/OnlyVideos';
 import { SharePage } from './lib/sharePage';
 import LoaderPage from './components/ui/loader';
+import ChatApp from './lib/brainly_bot';
 
 function App() {
   return (
@@ -54,7 +55,7 @@ const LoaderAndRoutes = () => {
         <Route path="/documents" element={<OnlyDocuments />} />
         <Route path="/links" element={< OnlyLinks />} />
         <Route path="/share/:shareLink" element={< SharePage />} />
-        
+        <Route path="/chat" element={< ChatApp />} />
       </Routes>
     </>
   );
