@@ -91,7 +91,9 @@ export async function SignInUser({
         password: password
       });
       const jwt = response.data.token;
+      const shareId = response.data.shareLink;
       localStorage.setItem("token",jwt);
+      localStorage.setItem("shareId",shareId);
       // navigate("/dashboard");
       console.log(`${BACKENDURL}/signin`);
       console.log('Signup successful:', response.data);

@@ -153,6 +153,28 @@ export const useContent = () => {
       throw error; // Re-throw the error for handling in the caller function
     }
   };
+  
+  const shareBrain = async () => {
+    try {
+      // Retrieve the share link from localStorage
+      const shareLink = localStorage.getItem("shareLink");
+  
+      if (!shareLink) {
+        throw new Error("No share link found in localStorage.");
+      }
+  
+      // Correcting the URL usage with dynamic insertion
+      const response = await axios.get(`${BACKENDURL}/brain/${shareLink}`);
+  
+      // Extracting and using the shareToken from the response
+      const links = response.data.links;
+      return links;
+      // Further logic to use shareToken can be added here
+    } catch (error) {
+      console.error(error);
+    }
+};
+
 
   return {
     content,
@@ -160,6 +182,7 @@ export const useContent = () => {
     shareContent,
     shareAllContent,
     deleteContent,
-    addContent
+    addContent,
+    shareBrain
 };
 }
