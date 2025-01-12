@@ -338,7 +338,8 @@ app.get("/api/v1/chat", async (req, res) => {
 
       // Handle the response from Gemii
       res.status(200).json({
-          mssg:response.data// Forward the data from Gemii's response
+          // mssg:response.data// Forward the data from Gemii's response
+          mssg:response.data?.candidates?.[0]?.content?.parts?.[0]?.text
       });
   } catch (error) {
       // Handle errors
