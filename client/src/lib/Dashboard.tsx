@@ -16,15 +16,17 @@ export function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   //@ts-ignore
   const [showAlert, setShowAlert] = useState(false);
-  const { content, loading, deleteContent,shareContent,shareAllContent} = useContent();
+  const { content, loading, deleteContent,shareContent} = useContent();
   
   const [fetchedLinks, setFetchedLinks] = useState<string[]>([]);
 
   // Handle share action
   const handleShare = async () => {
     try {
-      const links = await shareAllContent(); 
-      setFetchedLinks(links);  
+      // const links = await shareAllContent(); 
+      const shareId = localStorage.getItem('shareId');  
+      const shareLink = [`${window.location.origin}/share/${shareId}`];
+      setFetchedLinks(shareLink);  
       setIsModalOpen(true);  
     } catch (error) {
       console.error("Error sharing content:", error);

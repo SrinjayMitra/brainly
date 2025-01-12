@@ -8,6 +8,7 @@ import { OnlyTweets } from './lib/OnlyTweets';
 import { OnlyDocuments } from './lib/OnlyDocuments';
 import { OnlyLinks } from './lib/OnlyLinks';
 import { OnlyVideos } from './lib/OnlyVideos';
+import { SharePage } from './lib/sharePage';
 import LoaderPage from './components/ui/loader';
 
 function App() {
@@ -39,7 +40,7 @@ const LoaderAndRoutes = () => {
 
     return () => clearTimeout(timer); // Cleanup timer on component unmount
   }, [location]);
-
+  
   return (
     <>
       {isLoading && <LoaderPage />}  {/* Show Loader if loading */}
@@ -51,7 +52,9 @@ const LoaderAndRoutes = () => {
         <Route path="/tweets" element={<OnlyTweets />} />
         <Route path="/videos" element={<OnlyVideos />} />
         <Route path="/documents" element={<OnlyDocuments />} />
-        <Route path="/links" element={<OnlyLinks />} />
+        <Route path="/links" element={< OnlyLinks />} />
+        <Route path="/share/:shareLink" element={< SharePage />} />
+        
       </Routes>
     </>
   );

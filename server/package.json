@@ -6,7 +6,7 @@
   "test": "echo \"Error: no test specified\" && exit 1",
   "build": "npx tsc",                 
   "start": "node dist/be.js",         
-  "dev": "ts-node src/be.ts",         
+  "dev": "ts-node && src/be.ts",         
   "prod": "npm run build && npm run start" 
 },
 

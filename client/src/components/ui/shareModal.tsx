@@ -27,7 +27,7 @@ export function LinksModal({ ShowModal, SetShowModal, links }: LinksModalProps) 
             </span>
             <div className="space-y-4 m-2">
               <h2 className="text-xl font-semibold text-gray-800 text-center">
-                Links
+                Share Your Stuff
               </h2>
 
               {/* Display links */}
