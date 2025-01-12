@@ -10,14 +10,10 @@ import { verifyPassword } from "./helpers";
 import { Request,Response } from "express";
 import cors from 'cors';
 import { ServerDescription } from "mongodb";
-import { URL,GEMINI_API_KEY,ANTHROPIC_API_KEY } from "./config";
+import { URL,GEMINI_API_KEY } from "./config";
 const BACKENDURL = URL;
-//@ts-ignore
-import Anthropic from '@anthropic-ai/sdk';
 
-const anthropic = new Anthropic({
-  apiKey: ANTHROPIC_API_KEY, // defaults to process.env["ANTHROPIC_API_KEY"]
-});
+
 const app = express();
 app.use(express.json())
 app.use(cors());
