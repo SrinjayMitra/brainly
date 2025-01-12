@@ -308,7 +308,7 @@ app.get("/api/v1/brain/:shareToken", async (req,res)   => {
 
 
 app.get("/api/v1/chat", async (req, res) => {
-  const message = req.body.message;
+  const message = req.query.message as string;
   try {
       // Send a POST request to the Gemii API (replace with the actual endpoint)
       const response = await axios.post(
