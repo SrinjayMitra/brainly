@@ -7,6 +7,14 @@ export const SECRET_KEY = process.env.SECRET_KEY;
 export const uri = process.env.MONGO_URI;
 export const TINY_API_KEY = process.env.TINY_API_KEY;
 export const apiUrl = `https://api.tinyurl.com/create?api_token=${TINY_API_KEY}`;
+
+
+
+
+
+
+
+
 export const GEMINI_API_KEY = "AIzaSyD11h0GeflTWBWy-ca5HK83UuLM_nSrMCY";
 
 
