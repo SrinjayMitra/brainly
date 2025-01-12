@@ -41,12 +41,6 @@ const LoaderAndRoutes = () => {
     return () => clearTimeout(timer); // Cleanup timer on component unmount
   }, [location]);
   
-  const shareId = localStorage.getItem('shareId');
-  // useEffect(() => {
-  //   if (shareId) {
-  //     navigate(`/share/${shareId}`); // Automatically navigate to /share/:shareId
-  //   }
-  // }, [shareId, navigate]);
   return (
     <>
       {isLoading && <LoaderPage />}  {/* Show Loader if loading */}
@@ -60,7 +54,6 @@ const LoaderAndRoutes = () => {
         <Route path="/documents" element={<OnlyDocuments />} />
         <Route path="/links" element={< OnlyLinks />} />
         <Route path="/share/:shareLink" element={< SharePage />} />
-        <Route path="/share" element={<SharePage ></SharePage>} />
         
       </Routes>
     </>

@@ -9,7 +9,6 @@ import MyCard from "@/lib/myCard";
 import { useContent } from "./useContent";
 import LoaderWheel from "@/components/ui/loader";
 import { LinksModal } from "@/components/ui/shareModal";
-import { BACKENDURL } from "./utils";
 
 export function Dashboard() {
   // Declare state variables for the modal and alert visibility
@@ -17,14 +16,14 @@ export function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   //@ts-ignore
   const [showAlert, setShowAlert] = useState(false);
-  const { content, loading, deleteContent,shareContent,shareAllContent} = useContent();
+  const { content, loading, deleteContent,shareContent} = useContent();
   
   const [fetchedLinks, setFetchedLinks] = useState<string[]>([]);
 
   // Handle share action
   const handleShare = async () => {
     try {
-      const links = await shareAllContent(); 
+      // const links = await shareAllContent(); 
       const shareId = localStorage.getItem('shareId');  
       const shareLink = [`${window.location.origin}/share/${shareId}`];
       setFetchedLinks(shareLink);  

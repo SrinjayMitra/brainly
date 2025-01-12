@@ -3,8 +3,6 @@ import MyCard from "@/lib/myCard";
 import { useParams } from 'react-router-dom';
 import { useContent } from "./useContent";
 import LoaderWheel from "@/components/ui/loader";
-import { ContentModal } from "@/components/ui/ContentModal";
-import { LinksModal } from "@/components/ui/shareModal";
 import axios from "axios";
 import { BACKENDURL } from "./utils";
 
@@ -12,7 +10,6 @@ export function SharePage() {
   // Getting the dynamic 'sharelink' from the URL
   const { shareLink } = useParams();
   console.log(shareLink);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [fetchedLinks, setFetchedLinks] = useState([]);
   const [loading, setLoading] = useState(true);
   const { shareContent } = useContent();
@@ -27,8 +24,7 @@ export function SharePage() {
           );
           
           if (response.data && response.data.links) {
-            setFetchedLinks(response.data.links); // Set the fetched content data
-            setIsModalOpen(true); // Open the modal after data is fetched
+            setFetchedLinks(response.data.links); 
           } else {
             console.error("Invalid data format from API.");
           }
@@ -42,7 +38,7 @@ export function SharePage() {
     }
   }, [shareLink]); // Add shareLink to the dependency array to re-run if it changes
 
-  // if (loading) return <LoaderWheel />; // Show the loader while fetching content
+  if (loading) return <LoaderWheel />; // Show the loader while fetching content
 
   return (
     <div className="h-full w-full bg-slate-200 pt-3 px-4">
@@ -74,15 +70,6 @@ export function SharePage() {
           ))
         )}
       </div>
-
-      {/* Modal handling if required */}
-      {/* {isModalOpen && (
-        <LinksModal
-          open={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          links={fetchedLinks}
-        />
-      )} */}
     </div>
   );
 }
