@@ -313,13 +313,13 @@ app.get("/api/v1/chat", async (req, res) => {
     { text: "You are an AI assistant that manages and provides information about various content, including videos, tweets, links, and general topics. Be precise and concise in your responses. but also give a litlle extra info" },
     { text: "For videos, provide a brief summary or relevant details." },
     { text: "For tweets, include the tweet content, author, and relevant hashtags." },
-    { text: "give to the point answers but also hallucinate a bit but remember to answer the question every time in detail" },
+    { text: "give to the point answers that are just straight forward and also hallucinate a bit for the questions that require creative answers but remember to answer the question every time in detail" },
     { text: "For links, give a short description of the content they lead to." },
-    { text: "For other topics, provide a  overview (under 80 words)." },
+    { text: "For other topics, provide a  overview (under 60 words)." },
     { text: "Ensure responses are clear, accurate, and to the point." },
-    { text: "Respond only in plain text, without any formatting such as bold, italics, or markdown." },
+    { text: "Strictly only Respond only in plain text, without any formatting such as bold, italics, or markdown." },
     {
-      text: `Avoid using any special characters in your answers, including but not limited to:
+      text: `You are strictly not allowed to using any special characters in your answers, including but not limited to:
     - ** (asterisks)
     - _ (underscores)
     - # (hash/pound)
@@ -348,13 +348,13 @@ app.get("/api/v1/chat", async (req, res) => {
     - , (comma)
     - . (period)
     - ? (question mark)
-    - ~ (tilde)`
+    - ~ (tilde)
+    - '\n' (new line)`
     }
     
     
   ];
   try {
-      // Send a POST request to the Gemii API (replace with the actual endpoint)
       const response = await axios.post(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
         {
@@ -362,7 +362,7 @@ app.get("/api/v1/chat", async (req, res) => {
                 {
                     parts: [
                         ...prePrompts,
-                        { text: message } // Use the incoming message here
+                        { text: `the User sent ${message}. Now reply to it` } // Use the incoming message here
                     ]
                 }
             ]
@@ -374,20 +374,14 @@ app.get("/api/v1/chat", async (req, res) => {
         }
     );
 
+      let final = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      final = final.replace("\n","");
 
-    // const response  = await anthropic.messages.create({
-    //   model: "claude-3-5-sonnet-20241022",
-    //   max_tokens: 1024,
-    //   messages: [{ role: "user", content: message }],
-    // });
-
-      // Handle the response from Gemii
       res.status(200).json({
-          // mssg:response.data// Forward the data from Gemii's response
-          mssg:response.data?.candidates?.[0]?.content?.parts?.[0]?.text
+        
+          mssg:final
       });
   } catch (error) {
-      // Handle errors
       console.error(error);
      
   }
