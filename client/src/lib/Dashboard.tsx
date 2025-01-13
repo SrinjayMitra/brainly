@@ -78,52 +78,6 @@ export function Dashboard() {
         </div>
 
         <div className="flex space-x-5 ml-52 p-3 min-h-screen flex-wrap space-y-3">
-          {/* <MyCard
-            type="document"
-            title="Project Document"
-            description="Details of the upcoming project"
-            content="This is the document content with detailed project info."
-            tags={["project", "document"]}
-            addedDate="12/03/2024"
-          />
-
-          <MyCard
-            type="youtube"
-            title="Project Document"
-            description="Details of the upcoming project"
-            content="https://www.youtube.com/watch?v=WKO88yY7zus"
-            tags={["project", "document"]}
-            addedDate="12/03/2024"
-          />
-
-          <MyCard
-            type="tweet"
-            title="Project Document"
-            description="Details of the upcoming project"
-            content="https://x.com/elonmusk/status/1875538271746634165"
-            tags={["project", "document"]}
-            addedDate="12/03/2024"
-          />
-          https://x.com/elonmusk/status/1875538271746634165
-
-          <MyCard
-            type="link"
-            title="Useful Resource"
-            description="Check out this amazing resource for developers."
-            content="https://tailwindcss.com/docs/transition-property"
-            tags={["resource", "link"]}
-            addedDate="09/03/2024"
-          />
-          <MyCard
-            type="document"
-            title="Project Document"
-            description="Details of the upcoming project"
-            content="This is the document content with detailed project info."
-            tags={["project", "document"]}
-            addedDate="12/03/2024"
-           /> */}
-        
-        
         
         {content.length === 0 ? (
       <div className="flex items-center justify-center min-h-screen w-full overflow-x-hidden">
@@ -166,10 +120,10 @@ export function Dashboard() {
         {/* Floating Round Button on the Right Hand Corner */}
         <div
   onClick={() =>{navigate("/chat")}}
-  className="fixed bottom-5 right-5 bg-blue-500 rounded-2xl p-4 shadow-2xl hover:bg-blue-600 transition-all ease-in-out duration-300 transform hover:scale-110 flex flex-col items-center space-y-2"
+  className="fixed bottom-5 right-5 bg-blue-500 rounded-2xl p-4 shadow-2xl hover:bg-blue-600 transition-all ease-in-out duration-300 transform hover:scale-110 flex flex-col items-center space-y-2 cursor-pointer"
 >
   {/* Circular background for the bot icon */}
-  <div className="bg-white rounded-full p-3 shadow-md">
+  <div className="bg-white rounded-full p-3 shadow-md ">
     <img
       src="https://img.icons8.com/nolan/64/bot.png"
       alt="bot"
