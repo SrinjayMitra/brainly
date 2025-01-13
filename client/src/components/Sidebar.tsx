@@ -5,6 +5,7 @@ import { YoutubeIcon } from "@/Icons/youtubeIcon";
 import { NotesIcon } from "@/Icons/notesIcon";
 import { LinkIcon } from "@/Icons/linkIcon";
 import { Logo } from "@/Icons/Logo";
+import LogoutIcon from "@/Icons/logoutIcon";
 import HomeIcon from "@/Icons/home";
 import { useNavigate } from "react-router-dom";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; // Import icons for collapse/expand
@@ -65,6 +66,14 @@ export function Sidebar() {
           icon={<HomeIcon size="md" />}
           text="Home"
           onClick={() => navigate("/dashboard")}
+        />
+        <SidebarItems
+          icon={<LogoutIcon size="lg" />}
+          text="Logout"
+          onClick={() =>{
+            localStorage.removeItem("token");
+            navigate("/signin");
+          }}
         />
       </div>
     </div>
