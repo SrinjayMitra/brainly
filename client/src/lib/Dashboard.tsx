@@ -9,7 +9,7 @@ import MyCard from "@/lib/myCard";
 import { useContent } from "./useContent";
 import LoaderWheel from "@/components/ui/loader";
 import { LinksModal } from "@/components/ui/shareModal";
-import { Navigate, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 
 export function Dashboard() {
