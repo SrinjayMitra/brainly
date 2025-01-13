@@ -9,6 +9,8 @@ import MyCard from "@/lib/myCard";
 import { useContent } from "./useContent";
 import LoaderWheel from "@/components/ui/loader";
 import { LinksModal } from "@/components/ui/shareModal";
+import { Navigate, useNavigate } from "react-router-dom";
+
 
 export function Dashboard() {
   // Declare state variables for the modal and alert visibility
@@ -19,6 +21,7 @@ export function Dashboard() {
   const { content, loading, deleteContent,shareContent} = useContent();
   
   const [fetchedLinks, setFetchedLinks] = useState<string[]>([]);
+  const navigate = useNavigate();
 
   // Handle share action
   const handleShare = async () => {
@@ -160,6 +163,27 @@ export function Dashboard() {
         SetShowModal={setIsModalOpen}
         links={fetchedLinks}  // Pass the fetched links to the modal
       />}
+        {/* Floating Round Button on the Right Hand Corner */}
+        <div
+  onClick={() =>{navigate("/chat")}}
+  className="fixed bottom-5 right-5 bg-blue-500 rounded-2xl p-4 shadow-2xl hover:bg-blue-600 transition-all ease-in-out duration-300 transform hover:scale-110 flex flex-col items-center space-y-2"
+>
+  {/* Circular background for the bot icon */}
+  <div className="bg-white rounded-full p-3 shadow-md">
+    <img
+      src="https://img.icons8.com/nolan/64/bot.png"
+      alt="bot"
+      className="h-10 w-10" // Adjust size as needed
+    />
+  </div>
+
+  {/* Text below the Bot Image */}
+  <span className="text-white text-xs font-semibold">Talk to AI Assistant</span>
+</div>
+
+
+
+
     </div>
   );
 }

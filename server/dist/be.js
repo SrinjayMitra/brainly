@@ -24,11 +24,6 @@ const helpers_2 = require("./helpers");
 const cors_1 = __importDefault(require("cors"));
 const config_2 = require("./config");
 const BACKENDURL = config_2.URL;
-//@ts-ignore
-const sdk_1 = __importDefault(require("@anthropic-ai/sdk"));
-const anthropic = new sdk_1.default({
-    apiKey: config_2.ANTHROPIC_API_KEY, // defaults to process.env["ANTHROPIC_API_KEY"]
-});
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
@@ -277,13 +272,57 @@ app.get("/api/v1/brain/:shareToken", (req, res) => __awaiter(void 0, void 0, voi
     }
 }));
 app.get("/api/v1/chat", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const message = req.body.message;
+    var _a, _b, _c, _d, _e, _f;
+    const message = req.query.message;
+    const prePrompts = [
+        { text: "You are an AI assistant that manages and provides information about various content, including videos, tweets, links, and general topics. Be precise and concise in your responses. but also give a litlle extra info" },
+        { text: "For videos, provide a brief summary or relevant details." },
+        { text: "For tweets, include the tweet content, author, and relevant hashtags." },
+        { text: "give to the point answers but also hallucinate a bit but remember to answer the question every time in detail" },
+        { text: "For links, give a short description of the content they lead to." },
+        { text: "For other topics, provide a  overview (under 80 words)." },
+        { text: "Ensure responses are clear, accurate, and to the point." },
+        { text: "Respond only in plain text, without any formatting such as bold, italics, or markdown." },
+        {
+            text: `Avoid using any special characters in your answers, including but not limited to:
+    - ** (asterisks)
+    - _ (underscores)
+    - # (hash/pound)
+    - * (asterisks)
+    - ~ (tilde)
+    - \` (backticks)
+    - [] (square brackets)
+    - {} (curly braces)
+    - () (parentheses)
+    - < > (angle brackets)
+    - ! (exclamation mark)
+    - @ (at symbol)
+    - $ (dollar sign)
+    - % (percent)
+    - ^ (caret)
+    - & (ampersand)
+    - = (equals sign)
+    - + (plus sign)
+    - | (pipe)
+    - ; (semicolon)
+    - : (colon)
+    - ' (single quotes)
+    - " (double quotes)
+    - / (forward slash)
+    - \\ (backslash)
+    - , (comma)
+    - . (period)
+    - ? (question mark)
+    - ~ (tilde)`
+        }
+    ];
     try {
         // Send a POST request to the Gemii API (replace with the actual endpoint)
         const response = yield axios_1.default.post(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${config_2.GEMINI_API_KEY}`, {
             contents: [
                 {
                     parts: [
+                        ...prePrompts,
                         { text: message } // Use the incoming message here
                     ]
                 }
@@ -300,7 +339,8 @@ app.get("/api/v1/chat", (req, res) => __awaiter(void 0, void 0, void 0, function
         // });
         // Handle the response from Gemii
         res.status(200).json({
-            mssg: response.data // Forward the data from Gemii's response
+            // mssg:response.data// Forward the data from Gemii's response
+            mssg: (_f = (_e = (_d = (_c = (_b = (_a = response.data) === null || _a === void 0 ? void 0 : _a.candidates) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.content) === null || _d === void 0 ? void 0 : _d.parts) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.text
         });
     }
     catch (error) {
